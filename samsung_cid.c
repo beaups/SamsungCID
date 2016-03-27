@@ -24,7 +24,7 @@ int mmc_movi_vendor_cmd(unsigned int arg, int fd) {
 
 	ret = ioctl(fd, MMC_IOC_CMD, &idata);
 
-    return ret;
+	return ret;
 }
 
 
@@ -57,7 +57,7 @@ int get_cid(char *cid) {
 		sscanf(&buf[i*2], "%2hhx", &cid[i]);
 	}
 
-    return 0;
+	return 0;
 }
 
 
@@ -77,15 +77,13 @@ int program_cid(int fd, char *cid) {
 
 	ret = ioctl(fd, MMC_IOC_CMD, &idata);
 
-    return ret;
+	return ret;
 }
 
 
 int is_samsung_emmc(char *cid) {
-	if(cid[0] == 0x15) return 1;
-	else return 0;
+	return (cid[0] == 0x15) ? 1 : 0;
 }
-
 
 void show_cid(char *cid) {
 	int i;
