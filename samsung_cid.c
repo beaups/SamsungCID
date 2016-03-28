@@ -2,6 +2,7 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 #include "mmc.h"
+#include <sys/reboot.h>
 
 
 #define CID_SIZE 16
@@ -144,7 +145,8 @@ void main(int argc, const char **argv) {
 		printf("[-] program_cid failed %d\n", ret);
 	}
 
-	printf("[+] success! reboot device and check CID\n");
+	printf("[+] success! powering off device, power back on and verify CID\n");
+	reboot(LINUX_REBOOT_CMD_POWER_OFF);
 }
 	
 	
