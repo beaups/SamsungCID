@@ -109,10 +109,10 @@ void main(int argc, const char **argv) {
 
 	show_cid(old_cid);
 
-	if(!is_samsung_emmc(old_cid)) {
-		printf("[-] don't try this on non-samsung eMMC, seriously.\n");
-		return;
-	}
+	//if(!is_samsung_emmc(old_cid)) {
+	//	printf("[-] don't try this on non-samsung eMMC, seriously.\n");
+	//	return;
+	//}
 
 	if(argc != 2 || strlen(argv[1]) != CID_SIZE*2) {
 		printf("[-] RTFC!! ./samsung_cid [NEW_CID]\n");
