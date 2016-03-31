@@ -232,7 +232,7 @@ int write_dev_signature(void *sig) {
 		goto out;
 	}
 
-	if(!fread(buf, sizeof(dev_sig), 1, f)) {
+	if(!fread(buf, sizeof(struct img_header), 1, f)) {
 		printf("[-] can't read aboot\n");
 		ret = -1;
 		goto out;
@@ -300,7 +300,7 @@ int program_dev_cid(void) {
 int nearly_useless_compat_check(void) {
 	FILE *f;
 	char *buf;
-	int ret;
+	int readed;
 
 	buf = calloc(4096, 1);
 	if(!buf) {
@@ -310,7 +310,8 @@ int nearly_useless_compat_check(void) {
 	f = fopen("/proc/cmdline", "r");
 	do {
 		fread(buf, 1, 4096, f);
-	} while (ret == 1);
+	} while (readed == 1);
+	free(buf);
 	return (strstr(buf, "amsung")) ? 1 : 0;
 }
 
@@ -321,7 +322,8 @@ int do_dev_loaders(void) {
 	printf("[+] backing up loaders, this will take a few minutes\n");
 	ret = backup_loaders();
 	if (ret == -2) {
-		printf("[-] you MUST have an 4GB sd card inserted\n");
+		printf("[-] you MUST have a 1GB or greater sd card inserted\n");
+		printf("[-] 4GB or greater is recommended\n");
 		printf("[-] do NOT patch this out of code!\n");//dumbasses will do this anyhow
 		return ret;
 	}
