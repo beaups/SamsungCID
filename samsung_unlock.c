@@ -301,6 +301,7 @@ int nearly_useless_compat_check(void) {
 	FILE *f;
 	char *buf;
 	int readed;
+	int re;
 
 	buf = calloc(4096, 1);
 	if(!buf) {
@@ -308,11 +309,10 @@ int nearly_useless_compat_check(void) {
 		return 0;
 	}
 	f = fopen("/proc/cmdline", "r");
-	do {
-		fread(buf, 1, 4096, f);
-	} while (readed == 1);
+	fread(buf, 1, 4096, f);
+	ret =  (strstr(buf, "amsung"));
 	free(buf);
-	return (strstr(buf, "amsung")) ? 1 : 0;
+	return ret;
 }
 
 
