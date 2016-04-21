@@ -300,7 +300,6 @@ int program_dev_cid(void) {
 int nearly_useless_compat_check(void) {
 	FILE *f;
 	char *buf;
-	int readed;
 	int ret;
 
 	buf = calloc(4096, 1);
@@ -310,7 +309,7 @@ int nearly_useless_compat_check(void) {
 	}
 	f = fopen("/proc/cmdline", "r");
 	fread(buf, 1, 4096, f);
-	ret =  (strstr(buf, "amsung"));
+	ret =  (int)strstr(buf, "amsung");
 	free(buf);
 	return ret;
 }
