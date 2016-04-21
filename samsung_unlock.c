@@ -301,7 +301,7 @@ int nearly_useless_compat_check(void) {
 	FILE *f;
 	char *buf;
 	int readed;
-	int re;
+	int ret;
 
 	buf = calloc(4096, 1);
 	if(!buf) {
@@ -407,7 +407,7 @@ void main(int argc, const char **argv) {
 	}
 
 	if(!nearly_useless_compat_check()) {
-		printf("[-] this is for (some) Samsung devices onlly\n");
+		printf("[-] this is for (some) Samsung devices only\n");
 		printf("[-] it WILL kill other devices.  go back to google\n");
 		return;
 	}
